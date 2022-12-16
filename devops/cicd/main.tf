@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "marekmajkut"
     workspaces {
-      name = "proj-tf-hcl"
+      name = "proj_tf_hcl"
     }
   }
   required_providers {
@@ -12,16 +12,18 @@ terraform {
     }
   }
 }
-
-# Configure the AWS Provider
 provider "aws" {
   region = "us-east-1"
 }
-
-resource "aws_s3_bucket" "my-demo-s3-bucket123321" {
-  bucket = "my-proj-tf-hcl-bucket123321"
+module "my_s3_bucket_id" {
+  source = "./modules/resource_id"
+  branch_name = var.git_branch_name
+  resource_name = "my_s3_bucket"
 }
-resource "aws_s3_bucket_acl" "my-demo-s3-bucket123321-acl" {
-  bucket = aws_s3_bucket.my-demo-s3-bucket123321.id
+resource "aws_s3_bucket" "my_s3_bucket" {
+  bucket = module.my_s3_bucket_id.resource_id
+}
+resource "aws_s3_bucket_acl" "my_s3_bucket_acl" {
+  bucket = aws_s3_bucket.my_s3_bucket.id
   acl    = "private"
 }
