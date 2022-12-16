@@ -1,7 +1,8 @@
-output "terraform_workspace" {
+output "terraform-workspace" {
   description = "The terraform workspace"
   value       = terraform.workspace
 }
-output "my_s3_bucket_id" {
-  value = module.my_s3_bucket_id.resource_id
+output "git-branch-name" {
+  description = "The Git branch name"
+  value       = var.git-branch-name
 }
