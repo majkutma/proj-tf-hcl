@@ -19,7 +19,7 @@ resource "aws_amplify_app" "my-amplify-app" {
               commands:
                 - npm run build
           artifacts:
-            baseDirectory: dist/app
+            baseDirectory: dist/proj-terraform
             files:
               - '**/*'
           cache:
