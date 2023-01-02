@@ -13,9 +13,7 @@ terraform {
   }
 }
 provider "aws" {
-  region = "us-east-1"
-  shared_credentials_files = ["C:/Users/fvg3843/.aws/credentials"]
-  profile = "private"
+  # region = "us-east-1"
   default_tags {
     tags = {
       apms-id = "example"
