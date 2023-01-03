@@ -1,6 +1,6 @@
 module "my-amplify-app-id" {
   source = "./modules/resource-id"
-  branch-name = var.git-branch-name
+  branch-name = var.GIT_BRANCH_NAME
   resource-name = "my-amplify-app"
 }
 resource "aws_amplify_app" "my-amplify-app" {
@@ -45,7 +45,7 @@ resource "aws_amplify_app" "my-amplify-app" {
   }
 }
 resource "aws_amplify_branch" "my-amplify-branch" {
-  branch_name = var.git-branch-name
+  branch_name = var.GIT_BRANCH_NAME
   app_id = aws_amplify_app.my-amplify-app.id
   framework = "Angular"
   stage = "PRODUCTION"

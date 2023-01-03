@@ -1,5 +1,4 @@
-variable "git-branch-name" {
-  default = "main"
+variable "GIT_BRANCH_NAME" {
   type = string
   description = "The Git branch name"
 }

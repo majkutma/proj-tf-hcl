@@ -1,6 +1,6 @@
 module "my-s3-bucket-id" {
   source = "./modules/resource-id"
-  branch-name = var.git-branch-name
+  branch-name = var.GIT_BRANCH_NAME
   resource-name = "my-s3-bucket"
 }
 resource "aws_s3_bucket" "my-s3-bucket" {
