@@ -1,5 +1,5 @@
 variable "git-branch-name" {
-  default = terraform.branch_name
+  default = "main"
   type = string
   description = "The Git branch name"
 }
