@@ -5,7 +5,7 @@ module "my-lambda-function-id" {
 }
 data "archive_file" "zipit" {
   type        = "zip"
-  source_file = "lambda-dist/dist/app.js"
+  source_dir = "lambda-dist/dist"
   output_path = "tf_lambda.zip"
 }
 resource "aws_lambda_function" "my-lambda-function" {
