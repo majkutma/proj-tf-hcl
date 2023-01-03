@@ -5,7 +5,7 @@ module "my-lambda-function-id" {
 }
 data "archive_file" "zipit" {
   type        = "zip"
-  source_file = "C:/Users/fvg3843/PROJECTS/PROJ/proj-tf-hcl/backend/integration/my-integration-lambda/dist"
+  source_file = "C:/Users/fvg3843/PROJECTS/PROJ/proj-tf-hcl/devops/cicd/lambda-dist/dist"
   output_path = "tf_lambda.zip"
 }
 resource "aws_lambda_function" "my-lambda-function" {
