@@ -1,13 +1,5 @@
-# variable "AWS_SECRET_ACCESS_KEY" {
-#   type = string
-#   description = "The AWS Account secret access key"
-# }
-# variable "AWS_ACCESS_KEY_ID" {
-#   type = string
-#   description = "The AWS Account access key ID"
-# }
 variable "git-branch-name" {
-  default = "main"
+  default = terraform.branch_name
   type = string
   description = "The Git branch name"
 }
