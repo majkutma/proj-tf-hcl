@@ -4,7 +4,11 @@ locals {
       replace(
         replace(
           join(
-            "-", [terraform.workspace, var.branch-name, var.resource-name]
+            "-", [
+              terraform.workspace,
+              substr(var.branch-name, 0, 16),
+              substr(var.resource-name, 0, 32)
+            ]
           ), "/[^a-zA-Z0-9-]/", "-"
         ),"/-{2,}/","-"
       )

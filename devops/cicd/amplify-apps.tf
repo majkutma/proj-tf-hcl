@@ -1,3 +1,7 @@
+locals {
+  app-root = "frontend"
+  base-directory = "dist/proj-terraform"
+}
 module "my-amplify-app-id" {
   source = "./modules/resource-id"
   branch-name = var.GIT_BRANCH_NAME
@@ -19,13 +23,13 @@ resource "aws_amplify_app" "my-amplify-app" {
               commands:
                 - npm run build
           artifacts:
-            baseDirectory: dist/proj-terraform
+            baseDirectory: ${local.base-directory}
             files:
               - '**/*'
           cache:
             paths:
               - node_modules/**/*
-        appRoot: ${var.REPOSITORY_FOLDER_PATH}
+        appRoot: ${local.app-root}
   EOT
 
   custom_rule {
@@ -41,7 +45,7 @@ resource "aws_amplify_app" "my-amplify-app" {
 
   environment_variables = {
     "AMPLIFY_DIFF_DEPLOY": "false",
-    "AMPLIFY_MONOREPO_APP_ROOT": "frontend"
+    "AMPLIFY_MONOREPO_APP_ROOT": local.app-root
   }
 }
 resource "aws_amplify_branch" "my-amplify-branch" {
