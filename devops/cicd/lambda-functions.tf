@@ -5,8 +5,8 @@ module "my-lambda-function-id" {
 }
 data "archive_file" "zipit" {
   type        = "zip"
-  # source_dir = "lambda-dist/dist"
-  source_dir = "../../backend/integration/my-integration-lambda/dist"
+  source_dir = "../cicd/lambda-dist/dist"
+  # source_dir = "../../backend/integration/my-integration-lambda/dist"
   output_path = "tf_lambda.zip"
 }
 resource "aws_lambda_function" "my-lambda-function" {
