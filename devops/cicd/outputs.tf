@@ -8,5 +8,5 @@ output "git-branch-name" {
 }
 output "terraform-branch-name" {
   description = "The terraform workspace"
-  value       = terraform.branch
+  value       = terraform
 }
