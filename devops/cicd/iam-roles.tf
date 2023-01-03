@@ -5,7 +5,7 @@ module "my-iam-role-id" {
 }
 resource "aws_iam_role" "my-iam-role" {
   name = module.my-iam-role-id.resource-id
-  assume_role_policy = <<EOF
+  assume_role_policy = <<EOT
     {
       "Version": "2012-10-17",
       "Statement": [
@@ -19,5 +19,5 @@ resource "aws_iam_role" "my-iam-role" {
         }
       ]
     }
-  EOF
+  EOT
 }

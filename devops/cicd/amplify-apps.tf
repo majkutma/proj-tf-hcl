@@ -11,7 +11,7 @@ resource "aws_amplify_app" "my-amplify-app" {
   name       = module.my-amplify-app-id.resource-id
   repository = var.REPOSITORY_URL
   access_token = var.REPOSITORY_ACCESS_TOKEN
-  build_spec = <<-EOT
+  build_spec = <<EOT
     version: 1
     applications:
       - frontend:
