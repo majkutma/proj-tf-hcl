@@ -15,3 +15,7 @@ resource "aws_lambda_function" "my-lambda-function" {
   handler = "dist/app.lambdaHandler"
   runtime = "nodejs18.x"
 }
+resource "aws_cloudwatch_log_group" "my-cloudwatch-log-group" {
+  name = "/aws/lambda/${aws_lambda_function.my-lambda-function.id}"
+  retention_in_days = 14
+}
