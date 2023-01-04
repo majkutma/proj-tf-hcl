@@ -4,14 +4,14 @@ module "my-lambda-function-id" {
   resource-name = "my-lambda-function"
 }
 data "archive_file" "zipit" {
-  type        = "zip"
+  type = "zip"
   source_dir = "../lambda-dist/my-integration-lambda/dist"
-  output_path = "tf_lambda.zip"
+  output_path = "tf-lambda.zip"
 }
 resource "aws_lambda_function" "my-lambda-function" {
   function_name = module.my-lambda-function-id.resource-id
   role = aws_iam_role.my-iam-role.arn
-  filename = "tf_lambda.zip"
+  filename = "tf-lambda.zip"
   handler = "dist/app.lambdaHandler"
   runtime = "nodejs18.x"
 }
