@@ -11,7 +11,9 @@ resource "null_resource" "lambda_dependencies" {
       cd ../lambda-dist/my-lambda-layer &&\
       mkdir ./node_install &&\
       cd ./node_install &&\
-      dnf module install nodejs:18/common
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+      source ~/.bash_profile
+      nvm install v13.6.0
       export PATH="$PWD/bin:$PATH" &&\
       cd .. &&\
       npm install --production
