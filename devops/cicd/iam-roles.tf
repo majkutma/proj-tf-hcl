@@ -1,9 +1,9 @@
-module "my-iam-role-id" {
+module "my_iam_role_id" {
   source = "./modules/resource-id"
-  branch-name = var.GIT_BRANCH_NAME
-  resource-name = "my-iam-role"
+  branch_name = var.GIT_BRANCH_NAME
+  resource_name = "my-iam-role"
 }
-data "aws_iam_policy_document" "aws-lambda-trust-policy" {
+data "aws_iam_policy_document" "aws_lambda_trust_policy" {
   statement {
     actions = ["sts:AssumeRole"]
     effect = "Allow"
@@ -13,11 +13,11 @@ data "aws_iam_policy_document" "aws-lambda-trust-policy" {
     }
   }
 }
-resource "aws_iam_role" "my-iam-role" {
-  name = module.my-iam-role-id.resource-id
-  assume_role_policy = data.aws_iam_policy_document.aws-lambda-trust-policy.json
+resource "aws_iam_role" "my_iam_role" {
+  name = module.my_iam_role_id.resource_id
+  assume_role_policy = data.aws_iam_policy_document.aws_lambda_trust_policy.json
 }
-resource "aws_iam_role_policy_attachment" "my-attachment" {
-  role       = aws_iam_role.my-iam-role.name
+resource "aws_iam_role_policy_attachment" "my_attachment" {
+  role       = aws_iam_role.my_iam_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }

@@ -1,3 +1,3 @@
-output "resource-id" {
-  value = local.resource-id
+output "resource_id" {
+  value = local.resource_id
 }

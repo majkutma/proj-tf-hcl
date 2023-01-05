@@ -1,14 +1,14 @@
 locals {
-  app-root = "frontend"
-  base-directory = "dist/proj-terraform"
+  app_root = "frontend"
+  base_directory = "dist/proj-terraform"
 }
-module "my-amplify-app-id" {
+module "my_amplify_app_id" {
   source = "./modules/resource-id"
-  branch-name = var.GIT_BRANCH_NAME
-  resource-name = "my-amplify-app"
+  branch_name = var.GIT_BRANCH_NAME
+  resource_name = "my-amplify-app"
 }
-resource "aws_amplify_app" "my-amplify-app" {
-  name       = module.my-amplify-app-id.resource-id
+resource "aws_amplify_app" "my_amplify_app" {
+  name       = module.my_amplify_app_id.resource_id
   repository = var.REPOSITORY_URL
   access_token = var.REPOSITORY_ACCESS_TOKEN
   build_spec = <<EOT
@@ -23,13 +23,13 @@ resource "aws_amplify_app" "my-amplify-app" {
               commands:
                 - npm run build
           artifacts:
-            baseDirectory: ${local.base-directory}
+            baseDirectory: ${local.base_directory}
             files:
               - '**/*'
           cache:
             paths:
               - node_modules/**/*
-        appRoot: ${local.app-root}
+        appRoot: ${local.app_root}
   EOT
 
   custom_rule {
@@ -45,12 +45,12 @@ resource "aws_amplify_app" "my-amplify-app" {
 
   environment_variables = {
     "AMPLIFY_DIFF_DEPLOY": "false",
-    "AMPLIFY_MONOREPO_APP_ROOT": local.app-root
+    "AMPLIFY_MONOREPO_APP_ROOT": local.app_root
   }
 }
-resource "aws_amplify_branch" "my-amplify-branch" {
+resource "aws_amplify_branch" "my_amplify_branch" {
   branch_name = var.GIT_BRANCH_NAME
-  app_id = aws_amplify_app.my-amplify-app.id
+  app_id = aws_amplify_app.my_amplify_app.id
   framework = "Angular"
   stage = "PRODUCTION"
 }

@@ -1,12 +1,12 @@
-module "my-s3-bucket-id" {
+module "my_s3_bucket_id" {
   source = "./modules/resource-id"
-  branch-name = var.GIT_BRANCH_NAME
-  resource-name = "my-s3-bucket"
+  branch_name = var.GIT_BRANCH_NAME
+  resource_name = "my-s3-bucket"
 }
-resource "aws_s3_bucket" "my-s3-bucket" {
-  bucket = module.my-s3-bucket-id.resource-id
+resource "aws_s3_bucket" "my_s3_bucket" {
+  bucket = module.my_s3_bucket_id.resource_id
 }
-resource "aws_s3_bucket_acl" "my-s3-bucket-acl" {
-  bucket = aws_s3_bucket.my-s3-bucket.id
+resource "aws_s3_bucket_acl" "my_s3_bucket_acl" {
+  bucket = aws_s3_bucket.my_s3_bucket.id
   acl    = "private"
 }
