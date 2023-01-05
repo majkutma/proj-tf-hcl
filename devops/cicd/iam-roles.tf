@@ -18,6 +18,6 @@ resource "aws_iam_role" "my-iam-role" {
   assume_role_policy = data.aws_iam_policy_document.aws-lambda-trust-policy.policy
 }
 resource "aws_iam_role_policy_attachment" "my-attachment" {
-  role       = "${aws_iam_role.terraform_function_role.name}"
+  role       = aws_iam_role.my-iam-role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
