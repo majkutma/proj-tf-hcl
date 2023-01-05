@@ -20,7 +20,7 @@ resource "null_resource" "lambda_dependencies" {
       curl https://nodejs.org/dist/v12.16.1/node-v12.16.1-linux-x64.tar.gz | tar xz --strip-components=1 &&\
       export PATH="$PWD/bin:$PATH" &&\
       cd .. &&\
-      npm install --production
+      npm install
     EOF
   }
   triggers = {
