@@ -3,9 +3,24 @@ module "my_lambda_function_id" {
   branch_name = var.GIT_BRANCH_NAME
   resource_name = "my-lambda-function"
 }
+resource "null_resource" "lambda_dependencies" {
+  provisioner "local-exec" {
+    command = "cd ../lambda-dist/my-lambda-layer && npm install --production"
+  }
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+}
+data "null_data_source" "wait_for_lambda_exporter" {
+  inputs = {
+    lambda_dependency_id = "null_resource.lambda_dependencies.id"
+    source_dir           = "../lambda-dist/my-lambda-layer"
+  }
+}
 data "archive_file" "zip-lambda-function" {
   type = "zip"
-  source_dir = "../lambda-dist/my-integration-lambda"
+  # source_dir = "../lambda-dist/my-integration-lambda"
+  source_dir = data.null_data_source.wait_for_lambda_exporter.outputs["source_dir"]
   output_path = "my-integration-lambda.zip"
 }
 resource "aws_lambda_function" "my_lambda_function" {
