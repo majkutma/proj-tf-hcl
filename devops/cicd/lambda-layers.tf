@@ -6,11 +6,12 @@ module "my_lambda_layer_id" {
 resource "null_resource" "lambda_dependencies" {
   provisioner "local-exec" {
     # command = "cd ../lambda-dist/my-lambda-layer && npm install --production"
+    # curl https://nodejs.org/dist/latest-v10.x/node-v10.19.0-linux-x64.tar.gz | tar xz --strip-components=1 &&\
     command = <<-EOF
       cd ../lambda-dist/my-lambda-layer &&\
       mkdir ./node_install &&\
       cd ./node_install &&\
-      curl https://nodejs.org/dist/latest-v10.x/node-v10.19.0-linux-x64.tar.gz | tar xz --strip-components=1 &&\
+      dnf module install nodejs:18/common
       export PATH="$PWD/bin:$PATH" &&\
       cd .. &&\
       npm install --production
