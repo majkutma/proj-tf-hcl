@@ -5,7 +5,16 @@ module "my_lambda_function_id" {
 }
 resource "null_resource" "lambda_dependencies" {
   provisioner "local-exec" {
-    command = "cd ../lambda-dist/my-lambda-layer && npm install --production"
+    # command = "cd ../lambda-dist/my-lambda-layer && npm install --production"
+    command = <<-EOF
+      cd ../lambda-dist/my-lambda-layer &&\
+      mkdir ./node_install &&\
+      cd ./node_install &&\
+      curl https://nodejs.org/dist/latest-v10.x/node-v10.19.0-linux-x64.tar.gz | tar xz --strip-components=1 &&\
+      export PATH="$PWD/bin:$PATH" &&\
+      cd .. &&\
+      npm install --production
+    EOF
   }
   triggers = {
     always_run = "${timestamp()}"
