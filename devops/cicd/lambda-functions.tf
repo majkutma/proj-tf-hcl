@@ -15,6 +15,11 @@ resource "aws_lambda_function" "my_lambda_function" {
   handler = "app.lambdaHandler"
   runtime = "nodejs18.x"
   layers = [aws_lambda_layer_version.my_lambda_layer.arn]
+  environment {
+    variables = {
+      NODE_PATH = "./:/opt/node_modules"
+    }
+  }
 }
 resource "aws_cloudwatch_log_group" "my_cloudwatch_log_group" {
   name = "/aws/lambda/${aws_lambda_function.my_lambda_function.id}"
