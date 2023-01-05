@@ -6,13 +6,15 @@ module "my_lambda_layer_id" {
 resource "null_resource" "lambda_dependencies" {
   provisioner "local-exec" {
     # command = "cd ../lambda-dist/my-lambda-layer && npm install --production"
+      # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash &&\
+      # source ~/.bash_profile &&\
+      # nvm install v13.6.0 &&\
     # curl https://nodejs.org/dist/latest-v10.x/node-v10.19.0-linux-x64.tar.gz | tar xz --strip-components=1 &&\
     command = <<-EOF
       cd ../lambda-dist/my-lambda-layer &&\
       mkdir ./node_install &&\
       cd ./node_install &&\
-      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash &&\
-      nvm install v13.6.0 &&\
+      curl https://nodejs.org/dist/v12.16.1/node-v12.16.1.tar.gz | tar xz &&\
       export PATH="$PWD/bin:$PATH" &&\
       cd .. &&\
       npm install --production
