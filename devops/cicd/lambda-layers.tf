@@ -31,7 +31,7 @@ data "null_data_source" "wait_for_lambda_exporter" {
   inputs = {
     lambda_dependency_id = "null_resource.lambda_dependencies.id"
     # source_dir           = "../lambda-dist/my-lambda-layer"
-    source_dir           = "../lambda-dist/my-lambda-layer/node_modules"
+    source_dir           = "../lambda-dist/my-lambda-layer"
   }
 }
 data "archive_file" "zip-layer" {
