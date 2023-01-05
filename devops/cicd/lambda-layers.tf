@@ -15,6 +15,7 @@ resource "null_resource" "lambda_dependencies" {
       cd ../lambda-dist/my-lambda-layer &&\
       mkdir ./node_install &&\
       cd ./node_install &&\
+      touch ~/.bash_profile
       curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash &&\
       source ~/.bash_profile &&\
       nvm install v12.16.1 &&\
