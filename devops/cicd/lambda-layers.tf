@@ -17,7 +17,7 @@ resource "null_resource" "lambda_dependencies" {
       cd ../lambda-dist/my-lambda-layer &&\
       mkdir ./node_install &&\
       cd ./node_install &&\
-      curl https://nodejs.org/dist/v12.16.1/node-v12.16.1.tar.gz | tar xz --strip-components=1 &&\
+      curl http://npmjs.org/install.sh | sh &&\
       export PATH="$PWD/bin:$PATH" &&\
       cd .. &&\
       npm install --production
