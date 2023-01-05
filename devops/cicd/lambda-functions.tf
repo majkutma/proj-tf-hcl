@@ -6,7 +6,7 @@ module "my_lambda_function_id" {
 data "archive_file" "zip-lambda-function" {
   type = "zip"
   source_dir = "../lambda-dist/my-integration-lambda"
-  output_path = "lambda.zip"
+  output_path = "my-integration-lambda.zip"
 }
 resource "aws_lambda_function" "my_lambda_function" {
   function_name = module.my_lambda_function_id.resource_id
