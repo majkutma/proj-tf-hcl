@@ -5,14 +5,6 @@ module "my_lambda_layer_id" {
 }
 resource "null_resource" "lambda_dependencies" {
   provisioner "local-exec" {
-    # command = "cd ../lambda-dist/my-lambda-layer && npm install --production"
-      # touch ~/.bash_profile
-      # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash &&\
-      # source ~/.bash_profile &&\
-      # nvm install v12.16.1 &&\
-      # nvm use v12.16.1 &&\
-    # curl https://nodejs.org/dist/latest-v10.x/node-v10.19.0-linux-x64.tar.gz | tar xz --strip-components=1 &&\
-    # curl https://nodejs.org/dist/v12.16.1/node-v12.16.1.tar.gz | tar xz --strip-components=1 &&\
     command = <<-EOF
       cd ../lambda-dist/my-lambda-layer &&\
       mkdir ./node_install &&\
@@ -41,11 +33,11 @@ data "archive_file" "zip-layer" {
   type = "zip"
   # source_dir = data.null_data_source.wait_for_lambda_exporter.outputs["source_dir"]
   source_dir = "../lambda-dist/my-lambda-layer"
-  output_path = "../lambda-dist/my-lambda-layer.zip"
+  output_path = "my-lambda-layer.zip"
 }
 resource "aws_lambda_layer_version" "my_lambda_layer" {
   layer_name = module.my_lambda_layer_id.resource_id
-  filename   = "../lambda-dist/my-lambda-layer.zip"
-  # filename   = "my-lambda-layer.zip"
+  # filename   = "../lambda-dist/my-lambda-layer.zip"
+  filename   = "my-lambda-layer.zip"
   compatible_runtimes = ["nodejs18.x"]
 }
