@@ -36,7 +36,7 @@ data "archive_file" "zip_layer" {
   output_path = "my-lambda-layer.zip"
 }
 resource "aws_lambda_layer_version" "my_lambda_layer" {
-  depends_on = [archive_file.zip_layer]
+  depends_on = [data.archive_file.zip_layer]
   layer_name = module.my_lambda_layer_id.resource_id
   # filename   = "../lambda-dist/my-lambda-layer.zip"
   filename   = "my-lambda-layer.zip"
