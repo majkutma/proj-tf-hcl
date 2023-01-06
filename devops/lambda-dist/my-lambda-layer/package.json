@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "zip": "7z a -tzip C:/Users/fvg3843/PROJECTS/PROJ/proj-tf-hcl/devops/lambda-dist/my-lambda-layerr.zip C:/Users/fvg3843/PROJECTS/PROJ/proj-tf-hcl/devops/lambda-dist/my-lambda-layer/node_modules",
+    "zip": "7z a -tzip C:/Users/fvg3843/PROJECTS/PROJ/proj-tf-hcl/devops/lambda-dist/my-lambda-layer.zip C:/Users/fvg3843/PROJECTS/PROJ/proj-tf-hcl/devops/lambda-dist/my-lambda-layer",
     "lint": "npx eslint ./**/**/src/*",
     "fix": "npx eslint --fix ./**/**/src/*",
     "test": "echo \"Error: no test specified\" && exit 1"
