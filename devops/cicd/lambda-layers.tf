@@ -30,20 +30,22 @@ resource "null_resource" "lambda_dependencies" {
     always_run = "${timestamp()}"
   }
 }
-data "null_data_source" "wait_for_lambda_exporter" {
-  inputs = {
-    lambda_dependency_id = "null_resource.lambda_dependencies.id"
-    source_dir           = "../lambda-dist/my-lambda-layer"
-  }
-}
+# data "null_data_source" "wait_for_lambda_exporter" {
+#   inputs = {
+#     lambda_dependency_id = "null_resource.lambda_dependencies.id"
+#     source_dir           = "../lambda-dist/my-lambda-layer"
+#   }
+# }
 data "archive_file" "zip-layer" {
+  depends_on = [null_resource.lambda_dependencies]
   type = "zip"
-  source_dir = data.null_data_source.wait_for_lambda_exporter.outputs["source_dir"]
-  output_path = "my-lambda-layer.zip"
+  # source_dir = data.null_data_source.wait_for_lambda_exporter.outputs["source_dir"]
+  source_dir = "../lambda-dist/my-lambda-layer"
+  output_path = "../lambda-dist/my-lambda-layer.zip"
 }
 resource "aws_lambda_layer_version" "my_lambda_layer" {
   layer_name = module.my_lambda_layer_id.resource_id
-  # filename   = "../lambda-dist/my-lambda-layer.zip"
-  filename   = "my-lambda-layer.zip"
+  filename   = "../lambda-dist/my-lambda-layer.zip"
+  # filename   = "my-lambda-layer.zip"
   compatible_runtimes = ["nodejs18.x"]
 }
