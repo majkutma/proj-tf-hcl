@@ -22,8 +22,8 @@ resource "null_resource" "lambda_dependencies" {
       ls &&\
       cd .. &&\
       ls &&\
-      npm install --omit=dev
-      ls &&\
+      npm install --omit=dev &&\
+      ls
     EOF
   }
   triggers = {
