@@ -17,7 +17,7 @@ resource "aws_lambda_function" "my_lambda_function" {
   layers = [aws_lambda_layer_version.my_lambda_layer.arn]
   environment {
     variables = {
-      NODE_PATH = "./:/opt/my-lambda-layer/node_modules"
+      NODE_PATH = "./:/opt/node_modules"
     }
   }
 }
