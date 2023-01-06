@@ -41,7 +41,7 @@ module "my_lambda_layer_id" {
 # }
 resource "aws_lambda_layer_version" "my_lambda_layer" {
   layer_name = module.my_lambda_layer_id.resource_id
-  filename   = "../lambda-dist/my-lambda-layer.zip"
+  filename   = "../lambda-dist/my-lambda-layerr.zip"
   # filename   = "my-lambda-layer.zip"
   compatible_runtimes = ["nodejs18.x"]
 }
