@@ -19,8 +19,11 @@ resource "null_resource" "lambda_dependencies" {
       cd ./node_install &&\
       curl https://nodejs.org/dist/v18.12.1/node-v18.12.1-linux-x64.tar.gz | tar xz --strip-components=1 &&\
       export PATH="$PWD/bin:$PATH" &&\
+      ls &&\
       cd .. &&\
+      ls &&\
       npm install --omit=dev
+      ls &&\
     EOF
   }
   triggers = {
