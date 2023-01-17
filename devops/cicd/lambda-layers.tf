@@ -1,6 +1,6 @@
 module "my_lambda_layer_id" {
-  source = "./modules/resource-id"
-  branch_name = var.GIT_BRANCH_NAME
+  source        = "./modules/resource-id"
+  branch_name   = var.GIT_BRANCH_NAME
   resource_name = "my-lambda-layer"
 }
 resource "null_resource" "lambda_dependencies" {
@@ -20,14 +20,14 @@ resource "null_resource" "lambda_dependencies" {
   }
 }
 data "archive_file" "zip_layer" {
-  depends_on = [null_resource.lambda_dependencies]
-  type = "zip"
-  source_dir = "../lambda-dist/my-lambda-layer"
+  depends_on  = [null_resource.lambda_dependencies]
+  type        = "zip"
+  source_dir  = "../lambda-dist/my-lambda-layer"
   output_path = "my-lambda-layer.zip"
 }
 resource "aws_lambda_layer_version" "my_lambda_layer" {
-  depends_on = [data.archive_file.zip_layer]
-  layer_name = module.my_lambda_layer_id.resource_id
-  filename   = "my-lambda-layer.zip"
+  depends_on          = [data.archive_file.zip_layer]
+  layer_name          = module.my_lambda_layer_id.resource_id
+  filename            = "my-lambda-layer.zip"
   compatible_runtimes = ["nodejs18.x"]
 }
